@@ -2,16 +2,17 @@
 const express = require("express");
 const logger = require("morgan");
 const bodyParser = require("body-parser");
-
 const http = require("http");
 const app = express();
+const routes = require("./routes");
+
+app.use(routes);
 
 app.get("*", (req, res) =>
   res.status(200).send({
     message: "Welcome to the beginning of nothingness."
   })
 );
-
 const server = http.createServer(app);
 server.listen(3000);
 module.exports = app;

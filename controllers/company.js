@@ -1,4 +1,4 @@
-Company = import("../models/company");
+Company = import("../models").company;
 
 module.exports.createCompany = (req, res, next) => {};
 
