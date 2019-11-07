@@ -5,8 +5,30 @@ const bodyParser = require("body-parser");
 // const multer = require("multer"); - For parsing multipart form.
 const http = require("http");
 const app = express();
-const routes = require("./routes");
-const { login, validateToken } = require("./middleware/auth");
+var cors = require("cors"); // For enabling CORS
+// INSTEAD OF USING THIS PACKAGE YOU CAN SET HEADERS LIKE
+
+// Website you wish to allow to connect
+// res.setHeader('Access-Control-Allow-Origin', '*');
+
+// Request methods you wish to allow
+// res.setHeader(
+//   "Access-Control-Allow-Methods",
+//   "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+// );
+
+// Request headers you wish to allow
+// res.setHeader(
+//   "Access-Control-Allow-Headers",
+//   "X-Requested-With, x-client-access-token, x-access-token, x-application-token, content-type, Authorization, Content-Type"
+// );
+
+// To Enable CORS
+// res.setHeader("Access-Control-Allow-Credentials", true);
+
+const authenticatedRoutes = require("./routes/authenticatedRoutes");
+const nonAuthenticatedRoutes = require("./routes/nonAuthenticatedRoutes");
+const { validateToken } = require("./middleware/auth");
 // Follow the below link to understand how body-parser works
 // https://medium.com/@adamzerner/how-bodyparser-works-247897a93b90
 app.use(bodyParser.json()); // for parsing application/json
@@ -25,9 +47,9 @@ models.sequelize
     console.log("Error occured while syncing database: ", err);
   });
 
-app.post("/login", login);
+app.use(nonAuthenticatedRoutes);
 
-app.use(validateToken, routes);
+app.use(validateToken, authenticatedRoutes);
 
 app.get("*", (req, res) =>
   res.status(200).send({
