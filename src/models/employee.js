@@ -1,15 +1,15 @@
-"use strict";
+'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Employee = sequelize.define("Employee", {
+  const Employee = sequelize.define('Employee', {
     name: { type: DataTypes.STRING, allowNull: false },
     designation: { type: DataTypes.STRING, defaultValue: false },
     salary: DataTypes.INTEGER
-  });
-  Employee.associate = function(models) {
+  })
+  Employee.associate = function (models) {
     Employee.belongsTo(models.Company, {
-      foreignKey: "companyId",
-      onDelete: "CASCADE"
-    });
+      foreignKey: 'companyId',
+      onDelete: 'CASCADE'
+    })
   };
-  return Employee;
+  return Employee
 };

@@ -1,17 +1,17 @@
-"use strict";
+'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Company = sequelize.define("Company", {
+  const Company = sequelize.define('Company', {
     name: {
       type: DataTypes.STRING,
       allowNull: false
     }
-  });
-  Company.associate = function(models) {
+  })
+  Company.associate = function (models) {
     // associations can be defined here
     Company.hasMany(models.Employee, {
-      foreignKey: "companyId",
+      foreignKey: 'companyId',
       allowNull: false
-    });
+    })
   };
-  return Company;
+  return Company
 };
