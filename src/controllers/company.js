@@ -39,12 +39,10 @@ module.exports.updateCompany = async (req, res, next) => {
       throwIf(r => !r, 400, "not found", "Company Not Found"),
       throwError(500, "Sequelize error")
     );
-    updatedCompany = await company
-      .update({ name: companyName })
-      .then(
-        throwIf(r => !r, 400, "not updated", "Company Not Updated"),
-        throwError(500, "Sequelize error")
-      );
+    updatedCompany = await company.update({ name: companyName }).then(
+      throwIf(r => !r, 400, "not updated", "Company Not Updated"),
+      throwError(500, "Sequelize error")
+    );
     sendSuccess(res, "Company Updated")({ updatedCompany });
   } catch (error) {
     sendError(res)(error);
@@ -58,12 +56,10 @@ module.exports.deleteCompany = async (req, res, next) => {
       throwIf(r => !r, 400, "not found", "Company Not Found"),
       throwError(500, "Sequelize error")
     );
-    company = await company
-      .destroy()
-      .then(
-        throwIf(r => !r, 400, "not deleted", "Company Not Deleted"),
-        throwError(500, "Sequelize error")
-      );
+    company = await company.destroy().then(
+      throwIf(r => !r, 400, "not deleted", "Company Not Deleted"),
+      throwError(500, "Sequelize error")
+    );
     sendSuccess(res, "Company Deleted")({ company });
   } catch (error) {
     sendError(res)(error);

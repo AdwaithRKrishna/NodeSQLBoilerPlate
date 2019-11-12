@@ -5,8 +5,11 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./app.js",
-    "db:pre-migrate": "node scripts/createDB.js",
+    "start": "nodemon --exec babel-node ./src/app.js",
+    "serve": "node build/app.js",
+    "build": "npm run clean && babel ./src -d build",
+    "clean": "rm -rf build && mkdir build",
+    "db:pre-migrate": "node ./src/scripts/createDB.js",
     "db:migrate": "npm run db:pre-migrate && node_modules/.bin/sequelize db:migrate"
   },
   "author": "",
@@ -23,6 +26,13 @@
     "sequelize": "^5.21.1"
   },
   "devDependencies": {
-    "nodemon": "^1.19.4"
+    "@babel/cli": "^7.7.0",
+    "@babel/core": "^7.7.2",
+    "@babel/node": "^7.7.0",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/register": "^7.7.0",
+    "mocha": "^6.2.2",
+    "nodemon": "^1.19.4",
+    "sinon": "^7.5.0"
   }
 }
