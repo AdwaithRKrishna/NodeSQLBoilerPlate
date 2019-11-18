@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 module.exports = (sequelize, DataTypes) => {
   const Employee = sequelize.define('Employee', {
     name: { type: DataTypes.STRING, allowNull: false },
@@ -10,6 +10,6 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'companyId',
       onDelete: 'CASCADE'
     })
-  };
+  }
   return Employee
-};
+}
