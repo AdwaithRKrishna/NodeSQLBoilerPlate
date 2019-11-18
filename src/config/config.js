@@ -9,10 +9,10 @@ module.exports = {
     operatorsAliases: false
   },
   test: {
-    username: 'root',
-    password: null,
-    database: 'database_test',
-    host: '127.0.0.1',
+    username: process.env.DB_TEST_USER_NAME || 'user',
+    password: process.env.DB_TEST_PASSWORD || 'password',
+    database: process.env.DB || 'database_test',
+    host: process.env.DB_TEST_HOST || 'localhost',
     dialect: 'mysql',
     operatorsAliases: false
   },
