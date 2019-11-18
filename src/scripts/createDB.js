@@ -1,9 +1,9 @@
 const mysql = require('mysql2/promise')
 require('dotenv').config()
-const env = process.env.NODE_ENV || 'development';
+const env = process.env.NODE_ENV || 'development'
 const config = require(__dirname + '/../config/config')[env]
 
-const dbName = process.env.DB || 'YOUR_DB';
+const dbName = config.database || 'YOUR_DB'
 
 mysql
   .createConnection({
@@ -14,7 +14,7 @@ mysql
   })
   .then(connection => {
     connection.query(`CREATE DATABASE IF NOT EXISTS ${dbName};`).then(res => {
-      console.info('Database create or successfully checked')
+      console.info('Database created or successfully checked')
       process.exit(0)
     })
   })
