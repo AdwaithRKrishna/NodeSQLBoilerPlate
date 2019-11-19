@@ -1,3 +1,4 @@
 // node modules are meant to ignored.
 node_modules
 .env
+build
